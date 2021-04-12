@@ -1,11 +1,13 @@
 <!--  -->
 <template id='cpn'>
     <div>
-      <h2>主页</h2>
+      <navbar><div slot="center">购物街</div></navbar>
     </div>
 </template>
 
 <script>
+    import navbar from 'components/common/navbar/NavBar'
+
     export default {
         template:'#cpn',
         //name:'',
@@ -14,7 +16,9 @@
             }
         },
         methods:{},
-        components:{},
+        components:{
+          navbar,
+        },
     }
 </script>
 
