@@ -28,7 +28,7 @@ export default new VueRouter({
       component:cart,
     },
     {
-      path:'/Profile',
+      path:'/profile',
       component:profile
     }
   ]
