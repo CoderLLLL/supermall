@@ -2,22 +2,22 @@
 <template id='cpn'>
     <div>
       <tab-bar>
-        <tab-bar-item path="/home" barcolor="blue">
+        <tab-bar-item path="/home">
           <img slot="item-icon" src="../../../assets/img/tabbar/home.svg" alt="">
           <img slot="item-icon-active" src="../../../assets/img/tabbar/home_active.svg" alt="">
           <div slot="item-text">首页</div>
         </tab-bar-item>
-        <tab-bar-item path="/category" barcolor="green">
+        <tab-bar-item path="/category">
           <img slot="item-icon" src="../../../assets/img/tabbar/category.svg" alt="">
           <img slot="item-icon-active" src="../../../assets/img/tabbar/category_active.svg" alt="">
           <div slot="item-text">分类</div>
         </tab-bar-item>
-        <tab-bar-item path="/cate"  barcolor="yellow">
+        <tab-bar-item path="/cate">
           <img slot="item-icon" src="../../../assets/img/tabbar/shopcart.svg" alt="">
           <img slot="item-icon-active" src="../../../assets/img/tabbar/shopcart_active.svg" alt="">
           <div slot="item-text">购物车</div>
         </tab-bar-item>
-        <tab-bar-item path="/Profile"  barcolor="skyblue">
+        <tab-bar-item path="/Profile">
           <img slot="item-icon" src="../../../assets/img/tabbar/profile.svg" alt="">
           <img slot="item-icon-active" src="../../../assets/img/tabbar/profile_active.svg" alt="">
           <div slot="item-text">用户</div>

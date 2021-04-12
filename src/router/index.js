@@ -1,18 +1,17 @@
-import vue from 'vue'
+import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { component } from 'vue/types/umd'
 
 const home = () => import('../views/home/Home')
 const category = () => import('../views/category/Category')
 const cart = () => import('../views/cart/Cart')
 const profile = () => import('../views/Profile/Profile')
 
-vue.use(VueRouter)
+Vue.use(VueRouter)
 
-const routers =[
+const routers = [
   {
-    path:'',
-    redirect:'/home'
+    path: '',
+    redirect: '/home'
   },
   {
     path:'/home',
