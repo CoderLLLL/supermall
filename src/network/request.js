@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-export function requst(config){
+export function request(config){
   const instance = axios.create({
     baseURL:'http://123.207.32.32:8000',
     timeout:5000,
   })
 
   instance.interceptors.request.use(config =>{
-    return config.data;
+    return config;
   },err =>{
     console.log(err);
   })
@@ -18,5 +18,5 @@ export function requst(config){
     console.log(err);
   })
 
-  return requst(config);
+  return instance(config);
 }

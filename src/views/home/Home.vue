@@ -14,11 +14,20 @@
         //name:'',
         data () {
             return {
+              banners:[],
+              recommends:[],
+              dKeyword:[],
+              Keywords:[],
             }
         },
         created(){
           getHomeMultidata().then(res =>{
-            console.l0g(res);
+            console.log(res);
+            const datas = res.data;
+            this.banners = datas.banner.list;
+            this.recommends = datas.recommend.list;
+            this.dKeyword = datas.dKeyword;
+            this.Keywords = datas.keywords;
           })
         },
         methods:{},
