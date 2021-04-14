@@ -112,7 +112,7 @@
 </template>
 
 <script>
-    import {getHomeMultidata} from 'network/home'
+    import {getHomeMultidata,getHomeGoods} from 'network/home'
 
     import navbar from 'components/common/navbar/NavBar'
     import TabControl from 'components/content/tabControl/TabControl'
@@ -129,21 +129,39 @@
             return {
               banners:[],
               recommends:[],
-              dKeyword:[],
-              Keywords:[],
+              //dKeyword:[],
+              //Keywords:[],
+              goods:{
+                'pop':{page:0,list:[]},
+                'new':{page:0,list:[]},
+                'sell':{page:0,list:[]},
+              }
             }
         },
         created(){
-          getHomeMultidata().then(res =>{
-            console.log(res);
-            const datas = res.data;
-            this.banners = datas.banner.list;
-            this.recommends = datas.recommend.list;
-            this.dKeyword = datas.dKeyword;
-            this.Keywords = datas.keywords;
-          })
+          this.getHomeMultidata();
+          this.getHomeGoods('pop');
+          this.getHomeGoods('new');
+          this.getHomeGoods('sell');
         },
-        methods:{},
+        methods:{
+          getHomeMultidata(){
+            getHomeMultidata().then(res =>{
+              const datas = res.data;
+              this.banners = datas.banner.list;
+              this.recommends = datas.recommend.list;
+              this.dKeyword = datas.dKeyword;
+              this.Keywords = datas.keywords;
+            });
+          },
+          getHomeGoods(type){
+            const page = this.goods[type].page + 1;
+            getHomeGoods(type,page).then(res =>{
+              this.goods[type].list.push(res.data.list)
+              this.goods[type].page++;
+            })
+          }
+        },
         components:{
           navbar,
           TabControl,
