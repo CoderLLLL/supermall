@@ -99,6 +99,8 @@
           RecommendView,
           FeatureView,
           GoodList,
+          Scroll,
+          BackTop,
         },
     }
 </script>
@@ -106,6 +108,8 @@
 <style  scoped>
   #home{
     padding-top: 44px;
+    height: 100vh;
+    position: relative;
   }
   .home-nav{
     position: fixed;
@@ -121,8 +125,15 @@
     top: 44px;
     z-index: 9;
   }
-  .content{
-    height: 300px;
+  /* .content{
+    height: 100%;
     overflow: hidden;
+  } */
+  .content{
+    overflow: hidden;
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+
   }
 </style>

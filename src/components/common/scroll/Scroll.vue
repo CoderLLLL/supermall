@@ -8,23 +8,22 @@
 </template>
 
 <script>
-  import Bscroll from 'better-scroll'
+    import Bscroll from 'better-scroll'
     export default {
         template:'#cpn',
         //name:'',
         data () {
             return {
-              scrol:null,
+              scroll:null,
             }
         },
         methods:{},
-        components:{
-          Scroll,
-        },
+        components:{},
         mounted(){
           this.scroll = new Bscroll(this.$refs.homewrapper,{
             probeType:3,
             pullUpLoad:true,
+            click:true,
           })
 
           this.scroll.on('scroll',position=>{

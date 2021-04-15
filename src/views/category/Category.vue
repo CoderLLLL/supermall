@@ -121,6 +121,7 @@
           this.scroll = new Bscroll(document.querySelector(".wrapper"),{
             probeType:3,
             pullUpLoad:true,
+            click:true,
           })
 
           this.scroll.on('scroll',position=>{
