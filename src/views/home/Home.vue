@@ -2,12 +2,14 @@
 <template id='cpn'>
     <div id="home">
       <navbar class="home-nav"><div slot="center">购物街</div></navbar>
-      <home-swiper :banners="banners"></home-swiper>
-      <recommend-view :recommend="recommends"></recommend-view>
-      <feature-view></feature-view>
-      <tab-control class="tab-control" :titles="['流行','新款','精选']" @tabclick="tabclick"></tab-control>
-      <good-list :goods="showGoods"></good-list>
-
+      <scroll class="content">
+          <home-swiper :banners="banners"></home-swiper>
+          <recommend-view :recommend="recommends"></recommend-view>
+          <feature-view></feature-view>
+          <tab-control class="tab-control" :titles="['流行','新款','精选']" @tabclick="tabclick"></tab-control>
+          <good-list :goods="showGoods"></good-list>
+      </scroll>
+      </div>
     </div>
 </template>
 
@@ -17,6 +19,7 @@
     import navbar from 'components/common/navbar/NavBar'
     import TabControl from 'components/content/tabControl/TabControl'
     import GoodList from 'components/content/goods/GoodList'
+    import Scroll from 'components/common/scroll/Scroll'
 
     import HomeSwiper from 'views/home/childComps/HomeSwiper'
     import RecommendView from 'views/home/childComps/RecommendView'
@@ -96,7 +99,6 @@
           RecommendView,
           FeatureView,
           GoodList,
-
         },
     }
 </script>
@@ -118,5 +120,9 @@
     position: sticky;
     top: 44px;
     z-index: 9;
+  }
+  .content{
+    height: 300px;
+    overflow: hidden;
   }
 </style>

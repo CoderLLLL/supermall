@@ -2,6 +2,7 @@
 <template id='cpn'>
     <div class="wrapper">
       <ul>
+        <button @click="btn">按钮</button>
         <li>列表1</li>
         <li>列表2</li>
         <li>列表3</li>
@@ -117,9 +118,26 @@
             }
         },
         mounted(){
-          this.scroll = new Bscroll(document.querySelector(".wrapper"),{})
+          this.scroll = new Bscroll(document.querySelector(".wrapper"),{
+            probeType:3,
+            pullUpLoad:true,
+          })
+
+          this.scroll.on('scroll',position=>{
+            //console.log(position);
+          })
+
+          this.scroll.on("pullingUp",() =>{
+            console.log("加载更多")
+
+            this.scroll.finishPullUp()
+          })
         },
-        methods:{},
+        methods:{
+          btn(){
+            console.log(124);
+            }
+          },
         components:{},
     }
 </script>
