@@ -2,11 +2,11 @@
 <template id='cpn'>
     <div id="home">
       <navbar class="home-nav"><div slot="center">购物街</div></navbar>
-      <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentscroll" :pull-up-load="true" ><!-- @pullingUp="loadMore" -->
+      <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentscroll" @pullingUp="loadMore" :pull-up-load="true">
           <home-swiper :banners="banners"></home-swiper>
           <recommend-view :recommend="recommends"></recommend-view>
           <feature-view></feature-view>
-          <tab-control class="tab-control" :titles="['流行','新款','精选']" @tabclick="tabclick"></tab-control>
+          <tab-control class="tab-control" :titles="['流行','新款','精选']" @tabclick="tabclick" ref="tabControl"></tab-control>
           <good-list :goods="showGoods"></good-list>
       </scroll>
 
@@ -16,6 +16,7 @@
 
 <script>
     import {getHomeMultidata,getHomeGoods} from 'network/home'
+    import {debounce} from 'common/utils'
 
     import navbar from 'components/common/navbar/NavBar'
     import TabControl from 'components/content/tabControl/TabControl'
@@ -55,10 +56,14 @@
 
         },
         mounted(){
-          const refrech = this.debounce(this.$refs.scroll.refresh,500)
+          //图片加载完成后的事件监听，解决btter-scroll长度获取的问题和多次调用函数的防抖功能
+          const refrech = debounce(this.$refs.scroll.refresh,500)
           this.$bus.$on('itemImgeLoad',()=>{
             refrech();
           })
+          //获取tabcontrol组件的offsetTop
+          //所有组件都有一个$el:用于获取组件里面的元素（组件中的真实dom，这样才可以引用sffsetTop，因为自己注册的组件是没有这些属性的）
+          console.log(this.$refs.tabControl.$el.offsetTop);
         },
         computed:{
           showGoods(){
@@ -67,17 +72,6 @@
 
         },
         methods:{
-          //防抖
-          debounce(func,delay){
-            let timer = null;
-            return function(...args){
-              if(timer) clearTimeout(timer);
-              timer = setTimeout(()=>{
-                func.apply(this,args)
-              },delay)
-            }
-
-          },
           //事件监听
           tabclick(index){
             switch(index){
@@ -98,10 +92,11 @@
           contentscroll(position){
             this.isShow = (-position.y) > 1000;
           },
-         /*  loadMore(){
+          loadMore(){
+            console.log(21342);
             this.getHomeGoods(this.currentType);
             this.$refs.scroll.scroll.refresh();
-          }, */
+          },
           //网络请求
           getHomeMultidata(){
             getHomeMultidata().then(res =>{
@@ -120,7 +115,7 @@
                 this.goods[type].list.push(n)
               } */
               this.goods[type].page++;
-              //this.$refs.scroll.finishPullUp();
+              this.$refs.scroll.finishPullUp();
             })
           }
         },
@@ -154,8 +149,6 @@
     top: 0;
   }
   .tab-control{
-    position: sticky;
-    top: 44px;
     z-index: 9;
   }
   /* .content{

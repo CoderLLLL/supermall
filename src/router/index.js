@@ -30,6 +30,6 @@ export default new VueRouter({
     {
       path:'/profile',
       component:profile
-    }
+    },
   ]
 })
