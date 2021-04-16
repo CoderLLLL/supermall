@@ -119,7 +119,7 @@
         },
         mounted(){
           this.scroll = new Bscroll(document.querySelector(".wrapper"),{
-            probeType:3,
+            probeType:0,
             pullUpLoad:true,
             click:true,
           })
