@@ -2,9 +2,9 @@
 <template id='cpn'>
     <div>
       <swiper>
-        <SwiperItem v-for="(item,index) in banners" :key="index">
+        <SwiperItem v-for="(item,index) in banners" :key="index" >
           <a :href="item.link">
-            <img :src="item.image" alt="">
+            <img :src="item.image" alt="" @load="imageLoad">
           </a>
         </SwiperItem>
       </swiper>
@@ -26,9 +26,17 @@
         //name:'',
         data () {
             return {
+              isLoad:false,
             }
         },
-        methods:{},
+        methods:{
+          imageLoad(){
+            if(!this.isLoad){
+              this.$emit('swiperImageLoad');
+            }
+            this.isLoad = true;
+          }
+        },
         components:{
           Swiper,
           SwiperItem,

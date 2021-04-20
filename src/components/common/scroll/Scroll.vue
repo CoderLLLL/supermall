@@ -36,25 +36,27 @@
           },
           refresh(){
            this.scroll && this.scroll.refresh();
-          }
+          },
+         /*  getScrollY(){
+            return this.scroll ? this.scroll.y : 0;   //在视频中bs有无法保存当前位置的bug，但是现在修复了，不需要重新定位
+          } */
         },
         components:{},
         mounted(){
           this.scroll = new Bscroll(this.$refs.homewrapper,{
             probeType:this.probeType,
             pullUpLoad:this.pullUpLoad,    //这个也会监听scroll
-            click:true,
+            click: true,
           })
 
-          if(this.probeType === 2 || this.probeTyppe === 3){
+          if(this.probeType === 2 || this.probeType === 3){
             this.scroll.on('scroll',position=>{
-            this.$emit('scroll',position);
-          })
+              this.$emit('scroll',position);
+            })
           }
 
          if(this.pullUpLoad){
             this.scroll.on("pullingUp",() =>{
-              console.log("加载更多")
               this.$emit('pullingUp');
             })
           }

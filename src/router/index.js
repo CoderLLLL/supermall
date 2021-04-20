@@ -5,6 +5,7 @@ const home = () => import('../views/home/Home')
 const category = () => import('../views/category/Category')
 const cart = () => import('../views/cart/Cart')
 const profile = () => import('../views/profile/Profile')
+const detail = () => import('../views/detail/Detail')
 
 Vue.use(VueRouter)
 
@@ -29,7 +30,11 @@ export default new VueRouter({
     },
     {
       path:'/profile',
-      component:profile
+      component:profile,
     },
+    {
+      path:'/detail/:iid',
+      component:detail,
+    }
   ]
 })

@@ -2,11 +2,12 @@
 <template id='cpn'>
     <div id="home">
       <navbar class="home-nav"><div slot="center">购物街</div></navbar>
+      <tab-control v-show="isTabFixed" class="tab-control" :titles="['流行','新款','精选']" @tabclick="tabclick" ref="tabControl1"></tab-control>
       <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentscroll" @pullingUp="loadMore" :pull-up-load="true">
-          <home-swiper :banners="banners"></home-swiper>
+          <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"></home-swiper>
           <recommend-view :recommend="recommends"></recommend-view>
           <feature-view></feature-view>
-          <tab-control class="tab-control" :titles="['流行','新款','精选']" @tabclick="tabclick" ref="tabControl"></tab-control>
+          <tab-control  :titles="['流行','新款','精选']" @tabclick="tabclick" ref="tabControl2"></tab-control>
           <good-list :goods="showGoods"></good-list>
       </scroll>
 
@@ -45,6 +46,9 @@
               },
               currentType:'pop',
               isShow : false,
+              taboffsetTop:0,
+              isTabFixed:false,
+              saveY:0,
             }
         },
         created(){
@@ -53,7 +57,9 @@
           this.getHomeGoods('new');
           this.getHomeGoods('sell');
 
-
+        },
+        activated(){
+          this.$refs.scroll.refresh();
         },
         mounted(){
           //图片加载完成后的事件监听，解决btter-scroll长度获取的问题和多次调用函数的防抖功能
@@ -63,8 +69,14 @@
           })
           //获取tabcontrol组件的offsetTop
           //所有组件都有一个$el:用于获取组件里面的元素（组件中的真实dom，这样才可以引用sffsetTop，因为自己注册的组件是没有这些属性的）
-          console.log(this.$refs.tabControl.$el.offsetTop);
         },
+        /* activated(){
+          this.$refs.scroll.scrollTo(0,-this.saveY,0);
+          this.$refs.scroll.refresh();
+        },
+        deactivated(){
+          this.saveY = this.$refs.scroll.getScrollY();
+        }, */   //在视频中bs有无法保存当前位置的bug，但是现在修复了，不需要重新定位
         computed:{
           showGoods(){
             return this.goods[this.currentType].list;
@@ -72,6 +84,9 @@
 
         },
         methods:{
+          swiperImageLoad(){
+            this.taboffsetTop = this.$refs.tabControl2.$el.offsetTop;
+          },
           //事件监听
           tabclick(index){
             switch(index){
@@ -85,15 +100,18 @@
                 this.currentType = 'sell';
                 break
             }
+            this.$refs.tabControl1.currentIndex = index;
+            this.$refs.tabControl2.currentIndex = index;
           },
           backclick(){
             this.$refs.scroll.scrollTo(0,0,500)
           },
           contentscroll(position){
             this.isShow = (-position.y) > 1000;
+
+            this.isTabFixed = (-position.y) > this.taboffsetTop;
           },
           loadMore(){
-            console.log(21342);
             this.getHomeGoods(this.currentType);
             this.$refs.scroll.scroll.refresh();
           },
@@ -135,20 +153,21 @@
 
 <style  scoped>
   #home{
-    padding-top: 44px;
     height: 100vh;
     position: relative;
   }
   .home-nav{
-    position: fixed;
+
     background-color: var(--color-tint);
     color: white;
+/*     position: fixed;
     z-index: 9;
     left: 0;
     right: 0;
-    top: 0;
+    top: 0; */
   }
   .tab-control{
+    position: relative;
     z-index: 9;
   }
   /* .content{
