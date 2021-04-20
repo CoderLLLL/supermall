@@ -10,7 +10,7 @@
     import DetailNavBar from './detailComps/DetailNavBar'
     import DetailSwiper from './detailComps/DetailSwiper'
 
-    import {getDetail} from 'network/detail'
+    import {getDetail,Goods} from 'network/detail'
 
     export default {
         name:'Detail',
@@ -18,13 +18,18 @@
             return {
               iid:null,
               topImages:[],
+              Goods:null,
             }
         },
         created(){
           this.iid = this.$route.params.iid;
           getDetail(this.iid).then(res =>{
             console.log(res);
-            this.topImages = res.result.itemInfo.topImages;
+
+            const data = res.result;
+            this.topImages = data.itemInfo.topImages;
+            this.Goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
+
           })
         },
         activated(){
