@@ -9,7 +9,7 @@
 
 <script>
     export default {
-        //name:'',
+        name:'TabControl',
         props:{
           titles:{
             type:Array,

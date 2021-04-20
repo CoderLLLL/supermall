@@ -12,7 +12,7 @@
 
 <script>
     export default {
-        //name:'',
+        name:'GoodListItem',
         props:{
           goodsItem:{
             type:Object,

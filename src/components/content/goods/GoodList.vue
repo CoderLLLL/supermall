@@ -8,7 +8,7 @@
 <script>
     import GoodListItem from './GoodListItem'
     export default {
-        //name:'',
+        name:'GoodList',
         props:{
           goods:{
             type:Array,

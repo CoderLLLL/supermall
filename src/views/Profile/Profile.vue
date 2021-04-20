@@ -112,7 +112,7 @@
   import Scroll from 'components/common/scroll/Scroll'
     export default {
         template:'#cpn',
-        //name:'',
+        name:'Profile',
         data () {
             return {
             }

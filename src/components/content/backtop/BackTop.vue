@@ -7,7 +7,7 @@
 
 <script>
     export default {
-        //name:'',
+        name:'BackTop',
         data () {
             return {
             }

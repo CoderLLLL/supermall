@@ -31,7 +31,7 @@
 
 
     export default {
-        //name:'',
+        name:'Home',
         data () {
             return {
               banners:[],
@@ -69,13 +69,13 @@
           //获取tabcontrol组件的offsetTop
           //所有组件都有一个$el:用于获取组件里面的元素（组件中的真实dom，这样才可以引用sffsetTop，因为自己注册的组件是没有这些属性的）
         },
-        /* activated(){
-          this.$refs.scroll.scrollTo(0,-this.saveY,0);
+        activated(){
+          this.$refs.scroll.scrollTo(0,this.saveY,0);
           this.$refs.scroll.refresh();
         },
         deactivated(){
           this.saveY = this.$refs.scroll.getScrollY();
-        }, */   //在视频中bs有无法保存当前位置的bug，但是现在修复了，不需要重新定位
+        },   //在视频中bs有无法保存当前位置的bug，但是现在修复了，不需要重新定位
         computed:{
           showGoods(){
             return this.goods[this.currentType].list;

@@ -22,7 +22,7 @@
             }
           }
         },
-        //name:'',
+        name:'HomeSwiper',
         data () {
             return {
               isLoad:false,

@@ -110,7 +110,7 @@
 <script>
     import Bscroll from 'better-scroll'
     export default {
-        //name:'',
+        name:'Category',
         data () {
             return {
               scroll : null,

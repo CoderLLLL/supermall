@@ -19,7 +19,7 @@
             }
           }
         },
-        //name:'',
+        name:'DetailSwiper',
         data () {
             return {
             }

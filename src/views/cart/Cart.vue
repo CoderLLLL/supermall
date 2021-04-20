@@ -7,7 +7,7 @@
 
 <script>
     export default {
-        //name:'',
+        name:'Cart',
         data () {
             return {
             }

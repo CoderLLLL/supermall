@@ -15,7 +15,7 @@
 <script>
     import NavBar from 'components/common/navbar/NavBar'
     export default {
-        //name:'',
+        name:'DetailNavBar',
         data () {
             return {
               titles:['商品','参数','评论','推荐'],
