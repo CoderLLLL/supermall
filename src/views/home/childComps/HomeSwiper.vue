@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
     <div>
       <swiper>
         <SwiperItem v-for="(item,index) in banners" :key="index" >
@@ -22,7 +22,6 @@
             }
           }
         },
-        template:'#cpn',
         //name:'',
         data () {
             return {

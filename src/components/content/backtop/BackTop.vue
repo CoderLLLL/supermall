@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
     <div class="back-top">
       <img src="~assets/img/common/top.png" alt="">
     </div>
@@ -7,7 +7,6 @@
 
 <script>
     export default {
-        template:'#cpn',
         //name:'',
         data () {
             return {

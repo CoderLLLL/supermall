@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
     <div>
       <h2>购物车</h2>
     </div>
@@ -7,7 +7,6 @@
 
 <script>
     export default {
-        template:'#cpn',
         //name:'',
         data () {
             return {

@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template >
     <div id="home">
       <navbar class="home-nav"><div slot="center">购物街</div></navbar>
       <tab-control v-show="isTabFixed" class="tab-control" :titles="['流行','新款','精选']" @tabclick="tabclick" ref="tabControl1"></tab-control>
@@ -31,7 +31,6 @@
 
 
     export default {
-        template:'#cpn',
         //name:'',
         data () {
             return {

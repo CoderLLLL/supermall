@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
     <div class="wrapper">
       <ul>
         <button @click="btn">按钮</button>
@@ -110,7 +110,6 @@
 <script>
     import Bscroll from 'better-scroll'
     export default {
-        template:'#cpn',
         //name:'',
         data () {
             return {

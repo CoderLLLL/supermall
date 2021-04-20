@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
       <swiper class="detail-swiper">
         <swiper-item v-for="(item,index) in topImages" :key="index">
           <img :src="item" alt="">
@@ -19,7 +19,6 @@
             }
           }
         },
-        template:'#cpn',
         //name:'',
         data () {
             return {

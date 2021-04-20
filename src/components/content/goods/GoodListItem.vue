@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
     <div class="goods-item">
      <img :src="goodsItem.show.img" alt="" @load="imageLoad" @click="itemClick">
      <div class="goods-info">
@@ -12,7 +12,6 @@
 
 <script>
     export default {
-        template:'#cpn',
         //name:'',
         props:{
           goodsItem:{

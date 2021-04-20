@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
     <div class="wrapper" ref="homewrapper">
       <div class="content">
         <slot></slot>
@@ -10,7 +10,6 @@
 <script>
     import Bscroll from 'better-scroll'
     export default {
-        template:'#cpn',
         //name:'',
         props:{
           probeType:{

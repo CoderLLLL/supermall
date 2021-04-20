@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
     <div>
     <div class="recommend">
       <div v-for="item in recommend" class="recommenditem">
@@ -14,7 +14,6 @@
 
 <script>
     export default {
-        template:'#cpn',
         //name:'',
         props:{
           recommend:{

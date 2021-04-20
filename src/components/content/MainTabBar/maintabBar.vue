@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
     <div>
       <tab-bar>
         <tab-bar-item path="/home">
@@ -30,7 +30,6 @@
     import tabBar from '../../common/tabbar/TabBar'
     import tabBarItem from '../../common/tabbar/TabBarItem'
     export default {
-        template:'#cpn',
         name:'maintabBar',
         data () {
             return {

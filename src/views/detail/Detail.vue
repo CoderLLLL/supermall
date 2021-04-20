@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
     <div>
       <detail-nav-bar></detail-nav-bar>
       <detail-swiper :top-images="topImages"></detail-swiper>
@@ -13,8 +13,7 @@
     import {getDetail} from 'network/detail'
 
     export default {
-        template:'#cpn',
-        //name:'',
+        name:'Detail',
         data () {
             return {
               iid:null,

@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
     <div>
       <nav-bar>
         <div slot="left" @click="backClick">
@@ -15,7 +15,6 @@
 <script>
     import NavBar from 'components/common/navbar/NavBar'
     export default {
-        template:'#cpn',
         //name:'',
         data () {
             return {

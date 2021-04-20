@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
     <div class="goods">
       <good-list-item v-for="(items,index) in goods" :goods-item="items" :key="index"></good-list-item>
     </div>
@@ -8,7 +8,6 @@
 <script>
     import GoodListItem from './GoodListItem'
     export default {
-        template:'#cpn',
         //name:'',
         props:{
           goods:{

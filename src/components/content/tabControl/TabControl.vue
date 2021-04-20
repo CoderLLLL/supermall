@@ -1,5 +1,5 @@
 <!--  -->
-<template id='cpn'>
+<template>
     <div class="tab-control">
       <div v-for="(item, index) in titles" class="tab-control-item" :class="{active:index === currentIndex}" @click="itemclick(index)">
         <span>{{item}}</span>
@@ -9,7 +9,6 @@
 
 <script>
     export default {
-        template:'#cpn',
         //name:'',
         props:{
           titles:{
