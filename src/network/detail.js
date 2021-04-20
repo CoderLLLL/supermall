@@ -1,7 +1,7 @@
-import requset from 'request'
+import {request} from './request'
 
 export function getDetail(iid){
-  return requset({
+  return request({
     url:'/detail',
     params:{
       iid,
