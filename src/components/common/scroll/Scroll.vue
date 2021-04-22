@@ -37,7 +37,7 @@
            this.scroll && this.scroll.refresh();
           },
           getScrollY(){
-            return this.scroll ? this.scroll.y : 0;   //在视频中bs有无法保存当前位置的bug，但是现在修复了，不需要重新定位
+            return this.scroll ? this.scroll.y : 0;
           }
         },
         components:{},
