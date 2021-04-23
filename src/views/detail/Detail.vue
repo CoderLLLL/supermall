@@ -1,15 +1,15 @@
 <!--  -->
 <template>
     <div id="detail">
-      <detail-nav-bar class="detail-nav"></detail-nav-bar>
+      <detail-nav-bar class="detail-nav" @titleClick="titleClick"></detail-nav-bar>
       <scroll class="content" ref="scroll">
         <detail-swiper :top-images="topImages"></detail-swiper>
         <detail-base-info :goods="goods"></detail-base-info>
         <detail-shop-info :shop="shop"></detail-shop-info>
         <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"></detail-goods-info>
-        <detail-param-info :paramInfo="paramInfo"></detail-param-info>
-        <detail-comment-info :commentInfo="commentInfo"></detail-comment-info>
-        <goods-list :goods="recommend"></goods-list>
+        <detail-param-info ref="params" :paramInfo="paramInfo"></detail-param-info>
+        <detail-comment-info ref="comment" :commentInfo="commentInfo"></detail-comment-info>
+        <goods-list ref="recommend" :goods="recommend"></goods-list>
       </scroll>
     </div>
 </template>
@@ -42,7 +42,8 @@
               paramInfo:{},
               commentInfo:{},
               recommend:[],
-              ItemImgListener:null,
+              themeTopYs:[],
+              getthemeTopY:null,
             }
         },
         mixins:[itemListenerMxinin],
@@ -71,6 +72,16 @@
             getRecommend().then(res =>{
               this.recommend = res.data.list;
             })
+
+            /* //下一帧,就是当当前函数传给子组件的值DOM加载完毕后（不包括），再执行的函数
+            this.$nextTick(()=>{
+              this.themeTopYs = []
+              this.themeTopYs.push(0)
+              this.themeTopYs.push(this.$refs.params.$el.offsetTop)
+              this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
+              this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
+              console.log(this.themeTopYs);
+            }) */
           })
         },
 
@@ -83,9 +94,37 @@
         destroyed(){
           this.$bus.$off('itemImgeLoad',this.ItemImgListener)
         },
+        /* updated(){
+          this.themeTopYs = []
+          this.themeTopYs.push(0)
+          this.themeTopYs.push(this.$refs.params.$el.offsetTop)
+          this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
+          this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
+          console.log(this.themeTopYs);
+        }, */
         methods:{
           imageLoad(){
             this.$refs.scroll.refresh();
+
+            this.themeTopYs.push(0)
+            this.themeTopYs.push(this.$refs.params.$el.offsetTop)
+            this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
+            this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
+            console.log(this.themeTopYs);
+            //this.refresh; //方法二
+
+            //因为方法一已经做过函数防抖了，所以不需要再做一次函数防抖了
+            /*this.getthemeTopY = debounce(()=>{
+              this.themeTopYs = []
+              this.themeTopYs.push(0)
+              this.themeTopYs.push(this.$refs.params.$el.offsetTop)
+              this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
+              this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
+              console.log(this.themeTopYs);
+            })*/
+          },
+          titleClick(index){
+            this.$refs.scroll.scrollTo(0,-this.themeTopYs[index],500)
           }
         },
         components:{

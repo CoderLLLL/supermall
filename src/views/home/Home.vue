@@ -18,6 +18,7 @@
 <script>
     import {getHomeMultidata,getHomeGoods} from 'network/home'
     import {debounce} from 'common/utils'
+    import {itemListenerMxinin} from 'common/mixin'
 
     import navbar from 'components/common/navbar/NavBar'
     import TabControl from 'components/content/tabControl/TabControl'
@@ -28,7 +29,6 @@
     import HomeSwiper from 'views/home/childComps/HomeSwiper'
     import RecommendView from 'views/home/childComps/RecommendView'
     import FeatureView from'views/home/childComps/FeatureView'
-
 
     export default {
         name:'Home',
@@ -48,9 +48,9 @@
               taboffsetTop:0,
               isTabFixed:false,
               saveY:0,
-              ItemImgListener:null,
             }
         },
+        mixins:[itemListenerMxinin],
         created(){
           this.getHomeMultidata();
           this.getHomeGoods('pop');
@@ -61,15 +61,6 @@
           this.$refs.scroll.refresh();
         },
         mounted(){
-          //图片加载完成后的事件监听，解决btter-scroll长度获取的问题和多次调用函数的防抖功能
-          const refrech = debounce(this.$refs.scroll.refresh,500)
-
-          this.ItemImgListener = () =>{
-            refrech();
-          }
-          this.$bus.$on('itemImgeLoad',this.ItemImgListener)  //开始监听事件总线，后面离开这个页面的时候要取消监听
-          //获取tabcontrol组件的offsetTop
-          //所有组件都有一个$el:用于获取组件里面的元素（组件中的真实dom，这样才可以引用sffsetTop，因为自己注册的组件是没有这些属性的）
         },
         activated(){
           this.$refs.scroll.scrollTo(0,this.saveY,0);
@@ -83,7 +74,6 @@
           showGoods(){
             return this.goods[this.currentType].list;
           },
-
         },
         methods:{
           swiperImageLoad(){
