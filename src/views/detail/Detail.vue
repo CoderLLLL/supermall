@@ -8,7 +8,8 @@
         <detail-shop-info :shop="shop"></detail-shop-info>
         <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"></detail-goods-info>
         <detail-param-info :paramInfo="paramInfo"></detail-param-info>
-        <detail-comment-info :commentInfo=" commentInfo"></detail-comment-info>
+        <detail-comment-info :commentInfo="commentInfo"></detail-comment-info>
+        <goods-list :goods="recommend"></goods-list>
       </scroll>
     </div>
 </template>
@@ -21,10 +22,13 @@
     import DetailGoodsInfo from './childComps/DetailGoodsInfo'
     import DetailParamInfo from './childComps/DetailParamInfo'
     import DetailCommentInfo from './childComps/DetailCommentInfo'
+    import GoodsList from 'components/content/goods/GoodList'
 
     import Scroll from 'components/common/scroll/Scroll'
 
-    import {getDetail,Goods,Shop,GoodsParams} from 'network/detail'
+    import {getDetail,getRecommend,Goods,Shop,GoodsParams} from 'network/detail'
+    import {debounce} from 'common/utils'
+    import {itemListenerMxinin} from 'common/mixin'
 
     export default {
         name:'Detail',
@@ -37,8 +41,11 @@
               detailInfo:{},
               paramInfo:{},
               commentInfo:{},
+              recommend:[],
+              ItemImgListener:null,
             }
         },
+        mixins:[itemListenerMxinin],
         created(){
           //保存转入的iid
           this.iid = this.$route.params.iid;
@@ -58,16 +65,23 @@
             this.paramInfo = new GoodsParams(data.itemParams.info,data.itemParams.rule);
             //获取商品评价信息
             if(data.rate.cRate !== 0){
-              this.commonInfo = data.rate.list[0];
+              this.commentInfo = data.rate.list[0];
             }
+
+            getRecommend().then(res =>{
+              this.recommend = res.data.list;
+            })
           })
+        },
+
+        mounted(){
+
         },
         activated(){
           this.$refs.scroll.refresh();
         },
-        deactivated(){
-          this.iid = null;
-          this.topImages = [];
+        destroyed(){
+          this.$bus.$off('itemImgeLoad',this.ItemImgListener)
         },
         methods:{
           imageLoad(){
@@ -82,7 +96,8 @@
           DetailGoodsInfo,
           DetailParamInfo,
           DetailCommentInfo,
-          Scroll
+          Scroll,
+          GoodsList,
         },
     }
 </script>
