@@ -18,7 +18,7 @@
 <script>
     import {getHomeMultidata,getHomeGoods} from 'network/home'
     import {debounce} from 'common/utils'
-    import {itemListenerMxinin} from 'common/mixin'
+    import {itemListenerMxinin,BackTopMixin} from 'common/mixin'
 
     import navbar from 'components/common/navbar/NavBar'
     import TabControl from 'components/content/tabControl/TabControl'
@@ -29,6 +29,7 @@
     import HomeSwiper from 'views/home/childComps/HomeSwiper'
     import RecommendView from 'views/home/childComps/RecommendView'
     import FeatureView from'views/home/childComps/FeatureView'
+
 
     export default {
         name:'Home',
@@ -44,13 +45,13 @@
                 'sell':{page:0,list:[]},
               },
               currentType:'pop',
-              isShow : false,
+              //isShow : false,
               taboffsetTop:0,
               isTabFixed:false,
               saveY:0,
             }
         },
-        mixins:[itemListenerMxinin],
+        mixins:[itemListenerMxinin,BackTopMixin],
         created(){
           this.getHomeMultidata();
           this.getHomeGoods('pop');
@@ -95,12 +96,12 @@
             this.$refs.tabControl1.currentIndex = index;
             this.$refs.tabControl2.currentIndex = index;
           },
-          backclick(){
+          /* backclick(){
             this.$refs.scroll.scrollTo(0,0,500)
-          },
+          }, */
           contentscroll(position){
-            this.isShow = (-position.y) > 1000;
-
+            //this.isShow = (-position.y) > 1000;
+            this.listenShowBackTop(position)
             this.isTabFixed = (-position.y) > this.taboffsetTop;
           },
           loadMore(){

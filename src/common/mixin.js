@@ -1,4 +1,5 @@
 import {debounce} from 'common/utils'
+import BackTop from 'components/content/backtop/BackTop'
 
 export const itemListenerMxinin = {
   data(){
@@ -23,6 +24,20 @@ export const itemListenerMxinin = {
     //获取tabcontrol组件的offsetTop
     //所有组件都有一个$el:用于获取组件里面的元素（组件中的真实dom，这样才可以引用sffsetTop，因为自己注册的组件是没有这些属性的）
   }
+}
 
-
+export const BackTopMixin = {
+  data(){
+    return {
+      isShow : false,
+    }
+  },
+  methods:{
+    backclick(){
+      this.$refs.scroll.scrollTo(0,0,500)
+    },
+    listenShowBackTop(position){
+      this.isShow = (-position.y) > 1000;
+    }
+  }
 }

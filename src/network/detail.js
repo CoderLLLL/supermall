@@ -48,6 +48,6 @@ export class Shop{
     this.sells = shopInfo.cSell
     this.score = shopInfo.score
     this.goodsCount = shopInfo.cGoods
-
+    this.realPrice = shopInfo.lowNowPrice;
   }
 }
