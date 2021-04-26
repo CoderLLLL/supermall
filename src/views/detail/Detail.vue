@@ -117,7 +117,8 @@
           addCart(){
             const product = {};
             product.image = this.topImages[0];
-            product.title = this.goods.list;
+            //product.title = this.goods.list;
+            product.title = this.goods.title;
             product.desc = this.goods.desc;
             product.price = this.goods.realPrice;
             product.iid = this.iid;
