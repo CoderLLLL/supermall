@@ -14,6 +14,7 @@
       </scroll>
       <detail-bottom-bar class="bottom-bar" @addToCart="addCart"></detail-bottom-bar>
       <back-top @click.native="backclick" v-show="isShow"></back-top>
+      <!-- <toast :message="message" :show="show"></toast> -->
     </div>
 </template>
 
@@ -29,11 +30,14 @@
     import DetailBottomBar from './childComps/DetailBottomBar'
     import BackTop from 'components/content/backtop/BackTop'
 
+    import Toast from 'components/common/toast/Toast'
+
     import Scroll from 'components/common/scroll/Scroll'
 
     import {getDetail,getRecommend,Goods,Shop,GoodsParams} from 'network/detail'
     import {debounce} from 'common/utils'
     import {itemListenerMxinin,BackTopMixin} from 'common/mixin'
+    import { mapActions } from 'vuex'
 
     export default {
         name:'Detail',
@@ -51,6 +55,8 @@
               getthemeTopY:null,
               data1:0,
               currentIndex:0,
+              /* message:'',
+              show:false */
               //isShow : false,
             }
         },
@@ -111,6 +117,8 @@
           console.log(this.themeTopYs);
         }, */
         methods:{
+          ...mapActions(['addCarts']),
+
           /* backclick(){
             this.$refs.scroll.scrollTo(0,0,500)
           }, */
@@ -124,7 +132,21 @@
             product.iid = this.iid;
 
             //this.$store.commit('addCart',product);
-            this.$store.dispatch('addCart',product)
+            this.addCarts(product).then(res =>{
+/*               this.show = true,
+              this.message = res,
+
+              setTimeout(() =>{
+                this.show = false,
+                this.message = ''
+              },1000) */
+
+              this.$toast.show(res,1000)
+            })
+
+            /* this.$store.dispatch('addCart',product).then(res =>{
+              console.log(res);
+            }) */
           },
 
           imageLoad(){
@@ -181,6 +203,7 @@
           GoodsList,
           DetailBottomBar,
           BackTop,
+          Toast,
         },
     }
 </script>

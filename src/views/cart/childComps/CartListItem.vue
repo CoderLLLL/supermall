@@ -2,7 +2,7 @@
 <template>
   <div id="shop-item">
     <div class="item-selector">
-      <Check-button :is-checked="itemInfo.checked"  @click.native="checkClick"></Check-button>
+      <Check-button :is-checked="itemInfo.checked"  @click.native="checkedChange"></Check-button>
     </div>
     <div class="item-img">
       <img :src="itemInfo.image" alt="商品图片">
@@ -37,9 +37,6 @@
         },
         methods:
         {
-          checkClick(){
-            this.itemInfo.Checked = !this.itemInfo.Checked
-          },
           checkedChange: function () {
           this.itemInfo.checked = !this.itemInfo.checked;
           }
